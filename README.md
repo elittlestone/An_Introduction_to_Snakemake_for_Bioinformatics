@@ -1,0 +1,2 @@
+# An_Introduction_to_Snakemake_for_Bioinformatics
+Intro to Snakemake for Bioinformatics/Practice
