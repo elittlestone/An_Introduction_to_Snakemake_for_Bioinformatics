@@ -1,7 +1,0 @@
----
-title: "snakemake_for_bioinformatics"
----
-
-## Quarto
-
-
