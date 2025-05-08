@@ -1,0 +1,52 @@
+---
+title: "Snakemake for Bioinformatics Intro/Practice"
+subtitle: "A hands-on guide to using Snakemake for bioinformatics workflows"
+format: 
+  html:
+    theme: cosmo
+    code-fold: true
+    toc: true
+author: Ethan Littlestone
+knitr: true
+---
+*Document last rendered on: `r Sys.Date()`*
+
+
+## This quarto notebook is a walkthrough of the UC Davis Intro to Snakemake for Bioinformatics
+[Intro_to_Snakemake_for_Bioinformatics](https://farm.cse.ucdavis.edu/~ctbrown/2023-snakemake-book-draft/chapter_0.html)
+
+**To create a Quarto project, run** 
+
+```{bash Create Quarto Project, eval = FALSE} 
+quarto create-project Snakemake_Bioinformatics_Intro
+```
+
+
+**I'm also using lunarvim and quarto-preview for my analysis, with further explanations for how to use lunar vim and quarto found here:**
+
+  * [Quarto Preview](https://quarto.org/docs/tools/neovim.html)
+  * [Lunarvim](https://www.lunarvim.org)
+  * [Quarto Overview](https://quarto.org)
+
+
+
+```{bash Create Conda Environment, eval = F}
+mamba create -n quarto -c conda-forge -c bioconda python yq ncbi-datasets-cli quarto snakemake
+mamba activate quarto && mamba env export > environment.yml
+```
+
+**The first step in this workflow/tutorial of snakemake is to download the requisite fasta files (genomes in this case)**
+**We can do this with ncbi's datasets tool, which can be installed via conda/mamba**
+
+[datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/command-line-tools/download-and-install)
+```{bash Download genomes, eval=T, message=FALSE, warning=FALSE}
+# Install yq if needed with : brew install yq
+
+for genome in $(yq -r '.genomes[]' config.yaml); do
+  echo "Downloading genome!"
+  datasets download genome accession $genome;
+done
+
+unzip ncbi_dataset.zip
+```
+
